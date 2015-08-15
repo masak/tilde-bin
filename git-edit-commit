@@ -1,0 +1,9 @@
+COMMIT="$1"
+echo "${COMMIT:=HEAD}"
+OLD_HEAD=`git rev-parse HEAD`
+
+git reset --hard $COMMIT
+git reset --mixed HEAD~
+git commit --patch || (git reset --hard $OLD_HEAD && exit)
+git checkout .
+git rebase -X theirs $OLD_HEAD

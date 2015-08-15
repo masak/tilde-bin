@@ -1,0 +1,34 @@
+#! /usr/local/bin/perl6
+ 
+constant today = Date.today;
+constant last-month = Date.today.earlier(:month(1));
+ 
+multi MAIN() {
+    MAIN(last-month.year, last-month.month);
+}
+
+multi MAIN('current') {
+    MAIN(today.year, today.month);
+}
+
+multi MAIN($year, $month) {
+    my @weekdays = < _ Mån Tis Ons Tors Fre Lör Sön> X~ 'dag';
+    my @monthnames = < _
+        januari februari mars april
+        maj juni juli augusti
+        september oktober november december
+    >;
+ 
+    sub mday($day) { Date.new: $year, $month, $day }
+    my $first = mday 1;
+    my $last  = mday $first.days-in-month;
+ 
+    my $monthname = @monthnames[$month];
+ 
+    for $first .. $last {
+        my $weekday = @weekdays[.day-of-week];
+        my $monthday = .day-of-month;
+        say "" if $weekday eq 'Måndag' | 'Lördag' && $_ !== $first;
+        say "$weekday $monthday $monthname";
+    }
+}

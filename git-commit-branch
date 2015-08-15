@@ -1,0 +1,6 @@
+BRANCH="$1"
+shift
+
+git checkout $BRANCH
+git commit "$@"
+git checkout -

@@ -1,0 +1,9 @@
+ROOT=/home/masak/ours/course-abstracts
+cd $ROOT
+EN=courses-en
+SV=courses-sv
+
+find $EN $SV -name \*"$1"\*
+
+echo -n 'vi ' > /tmp/o-command
+find $EN $SV -name \*"$1"\* | perl -ple "\$_ = '$ROOT/' . \$_" | xargs echo >> /tmp/o-command

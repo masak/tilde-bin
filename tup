@@ -1,0 +1,16 @@
+SCRIPT=`tempfile --prefix=tup`
+
+echo 'cd public_html/carl/tmp' > $SCRIPT
+for file in "$@"
+do
+    echo "put $file" >> $SCRIPT
+done
+echo 'quit' >> $SCRIPT
+
+ftp -p masak.org < $SCRIPT
+rm $SCRIPT
+
+for file in "$@"
+do
+    echo "http://masak.org/carl/tmp/$file"
+done

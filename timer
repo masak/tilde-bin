@@ -1,0 +1,15 @@
+#! /usr/local/bin/perl6
+
+my $t = now;
+
+say "" for ^10;
+
+loop {
+    my $seconds = now - $t;
+    my $minutes;
+
+    ($minutes, $seconds) = $seconds / 60, $seconds % 60;
+    printf "\r%02d:%02d\t", $minutes, $seconds;
+
+    sleep 1;
+}
