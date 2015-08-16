@@ -1,4 +1,4 @@
-#! /usr/local/bin/perl6
+#! /usr/local/bin/cautious-perl6
 
 sub MAIN(:$force) {
     my $today = Date.today;
