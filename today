@@ -32,8 +32,8 @@ sub MAIN(:$force) {
         "month 2, day 1"      "Raido's birthday"
     »;
 
-    for ^7 {
-        my $d = Date.today.later(:days($_));
+    for ^7 -> $days {
+        my $d = Date.today.later(:$days);
         sub wd($d) { <. mon tue wed thu fri sat sun>[$d.day-of-week] }
         my $events = %year-events{"month $d.month(), day $d.day()"} // "";
         if $d.day-of-month == 1 {
