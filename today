@@ -30,6 +30,7 @@ sub MAIN(:$force) {
         "month 3, day 13"     "Jakob Beran's birthday"
         "month 12, day 20"    "Sabina's birthday"
         "month 2, day 1"      "Raido's birthday"
+        "month 8, day 29"     "Börje's birthday (1979)"
     »;
 
     for Date.today .. Date.today.later(:7days) -> $date {
