@@ -41,9 +41,4 @@ sub MAIN(:$force) {
         my $wd = <. mon tue wed thu fri sat sun>[$date.day-of-week];
         say "  $wd  {$date.day-of-month}  $events";
     }
-
-    if $today.day-of-week == 5 {
-        say "";
-        say "Is Sunday a travel day? Do you know which hotel you'll be staying at?";
-    }
 }
