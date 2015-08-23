@@ -1,14 +1,14 @@
 #! /usr/local/bin/perl6
  
-constant today = Date.today;
-constant last-month = today.earlier(:month(1));
+constant TODAY = Date.today;
+constant LAST_MONTH = TODAY.earlier(:month(1));
  
 multi MAIN() {
-    MAIN(last-month.year, last-month.month);
+    MAIN(LAST_MONTH.year, LAST_MONTH.month);
 }
 
 multi MAIN('current') {
-    MAIN(today.year, today.month);
+    MAIN(TODAY.year, TODAY.month);
 }
 
 multi MAIN($year, $month) {
