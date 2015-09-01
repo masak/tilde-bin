@@ -13,15 +13,16 @@ sub MAIN(:$force) {
     try "%*ENV<HOME>/.today-data".IO.lines.map({
         /^ (\d+) \h+ (\d+) \h+ (\N+) $/
             or die "Unrecognized line in data file: '$_'";
-        %year-events{"month $0, day $1"} = ~$2;
+        %year-events{"month $0, day $1"}.push: ~$2;
     });
 
     for Date.today .. Date.today.later(:7days) -> $date {
-        my $events = %year-events{"month $date.month(), day $date.day()"} // "";
+        my @events = %year-events{"month $date.month(), day $date.day()"} // ();
         if $date.day-of-month == 1 {
-            $events ~= ", time to send hours to \$boss";
+            @events.push: "time to send hours to \$boss";
         }
         my $wd = <. mon tue wed thu fri sat sun>[$date.day-of-week];
-        say "  $wd  {$date.day-of-month}  $events";
+        my $dom = $date.day-of-month.fmt("%2d");
+        say "  $wd  $dom  @events.join(", ")";
     }
 }
