@@ -4,16 +4,8 @@ then
   exit 1
 fi
 
-SCRIPT=`tempfile --prefix=zup`
 ZIPFILE=`basename -s/ $1`.zip
 
 zip -q -r $ZIPFILE $1
-echo 'cd public_html/carl/tmp' > $SCRIPT
-echo "put $ZIPFILE" >> $SCRIPT
-echo 'quit' >> $SCRIPT
-
-ftp -p masak.org < $SCRIPT
-rm $SCRIPT
+tup $ZIPFILE
 rm $ZIPFILE
-
-echo "http://masak.org/carl/tmp/$ZIPFILE"
