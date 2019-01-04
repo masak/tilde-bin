@@ -1,0 +1,4 @@
+#! /bin/bash
+
+BRANCH_NAME=`git symbolic-ref --short HEAD`
+git push -u origin $BRANCH_NAME && git checkout master
