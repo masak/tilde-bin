@@ -1,0 +1,6 @@
+#! /bin/bash
+
+if ! git diff --staged --quiet
+then git commit --amend --reuse-message=HEAD
+else echo No files in staging area
+fi
