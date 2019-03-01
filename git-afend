@@ -1,6 +1,13 @@
 #! /bin/bash
 
-if ! git diff --staged --quiet
-then git commit --amend --reuse-message=HEAD
-else echo No files in staging area
+if [ "$#" -ne 0 ]; then
+    git commit --amend --reuse-message=HEAD "$@"
+else
+    if ! git diff --staged --quiet; then
+        git commit --amend --reuse-message=HEAD
+    else
+        echo No files in staging area
+        exit 1
+    fi
 fi
+
