@@ -1,0 +1,8 @@
+#! /bin/bash
+
+BRANCH_NAME=`git symbolic-ref --short HEAD`
+git checkout -q "$BRANCH_NAME-wip" &&
+    git reset --mixed -q HEAD~ &&
+    git checkout -q "$BRANCH_NAME" &&
+    git branch --delete --force -q "$BRANCH_NAME-wip" &&
+    git status

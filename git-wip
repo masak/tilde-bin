@@ -1,0 +1,10 @@
+#! /bin/bash
+
+BRANCH_NAME=`git symbolic-ref --short HEAD`
+git checkout -q -b "$BRANCH_NAME-wip" &&
+    git add -A &&
+    git commit -q -m'wip' &&
+    git checkout -q "$BRANCH_NAME"
+
+SHA=`git rev-parse --short $BRANCH_NAME-wip`
+echo "Stashed to $BRANCH_NAME-wip ($SHA)"
