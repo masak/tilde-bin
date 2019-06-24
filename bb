@@ -75,7 +75,7 @@ class Branch {
             default { "($.ahead ahead, $.behind behind)" }
         };
         my $color = do {
-            when $.is-current && !$.ahead && !$.behind { "bold white on_black" }
+            when $.is-current && !$.ahead && !$.behind { "bold black on_white" }
             when $.is-current && !$.behind { "bold white on_green" }
             when $.is-current && !$.ahead { "bold white on_black" }
             when $.is-current { "bold white on_cyan" }
@@ -101,8 +101,8 @@ my @branches = qx[git branch --no-color].lines.map: {
     my $behind = +qqx[git log --oneline {$name}..{$master} | wc -l].trim;
     my $is-master = $name eq $master;
     my $is-orphaned = qqx[git merge-base {$master} {$name}].lines == 0;
-    my $unix-timestamp = qqx[git log -1 --pretty="%ct" {$name}].trim.Int;
-    my $relative-time-ago = qqx[git log -1 --pretty="%cr" {$name}].trim;
+    my $unix-timestamp = qqx[git log -1 --pretty="%ct" {$name} --].trim.Int;
+    my $relative-time-ago = qqx[git log -1 --pretty="%cr" {$name} --].trim;
     Branch.new(
         :$name,
         :$is-master,
